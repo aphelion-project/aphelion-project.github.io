@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATIC WEB TOOLS - APHELION PROJECT</title>
+    <link rel="stylesheet" href="/aphelion-project.github.io/css/style.css">
+    <link rel="stylesheet" href="/aphelion-project.github.io/css/staticsitetools.css">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <nav class="nav">
+        <div class="nav-container">
+            <h1 class="logo"><a href="/aphelion-project.github.io/index.html" style="color: inherit; text-decoration: none;">APHELION</a></h1>
+            <div class="nav-links">
+                <a href="/aphelion-project.github.io/index.html#projects">PROJECTS</a>
+                <a href="/aphelion-project.github.io/index.html#tools">TOOLS</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon">☀</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-small">
+        <div class="hero-content">
+            <h2 class="hero-title">STATIC WEB TOOLS</h2>
+            <p class="hero-subtitle">Some tools and generators to help with site building.</p>
+        </div>
+    </section>
+
+    <section class="tool-nav-section">
+        <div class="container">
+            <div class="tool-nav-grid">
+                <button class="tool-nav-btn" data-tool="gradient">GRADIENT GENERATOR</button>
+                <button class="tool-nav-btn" data-tool="lorem">LOREM IPSUM</button>
+                <button class="tool-nav-btn" data-tool="spacing">LETTER SPACING</button>
+                <button class="tool-nav-btn" data-tool="qr">QR CODE</button>
+                <button class="tool-nav-btn" data-tool="minifier">CSS MINIFIER</button>
+                <button class="tool-nav-btn" data-tool="lightbox">LIGHTBOX GALLERY</button>
+                <button class="tool-nav-btn" data-tool="tooltip">TOOLTIP GENERATOR</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="gradient" class="tool-section">
+        <div class="container">
+            <h2 class="tool-title">GRADIENT GENERATOR</h2>
+            <p class="hero-subtitle" style="margin-bottom: 2rem;">Create CSS gradients with multiple color stops</p>
+            <div class="tool-content">
+                <div class="tool-panel">
+                    <div class="control-group">
+                        <label>Type</label>
+                        <select id="gradient-type" class="tool-select">
+                            <option value="linear">Linear</option>
+                            <option value="radial">Radial</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Angle</label>
+                        <input type="range" id="gradient-angle" min="0" max="360" value="90" class="tool-range">
+                        <span id="gradient-angle-value">90°</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Color 1</label>
+                        <input type="color" id="gradient-color1" value="#000000" class="tool-color">
+                    </div>
+                    <div class="control-group">
+                        <label>Color 2</label>
+                        <input type="color" id="gradient-color2" value="#ffffff" class="tool-color">
+                    </div>
+                    <button id="gradient-add-color" class="tool-btn">ADD COLOR STOP</button>
+                    <div id="gradient-stops"></div>
+                </div>
+                <div class="tool-output">
+                    <div id="gradient-preview" class="gradient-preview"></div>
+                    <div class="code-output">
+                        <code id="gradient-code">background: linear-gradient(90deg, #000000, #ffffff);</code>
+                    </div>
+                    <button class="copy-btn" data-copy="gradient-code">COPY CSS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lorem" class="tool-section section-alt">
+        <div class="container">
+            <h2 class="tool-title">LOREM IPSUM GENERATOR</h2>
+            <p class="hero-subtitle" style="margin-bottom: 2rem;">Generate placeholder text for mockups and prototypes</p>
+            <div class="tool-content">
+                <div class="tool-panel">
+                    <div class="control-group">
+                        <label>Type</label>
+                        <select id="lorem-type" class="tool-select">
+                            <option value="paragraphs">Paragraphs</option>
+                            <option value="sentences">Sentences</option>
+                            <option value="words">Words</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Count</label>
+                        <input type="number" id="lorem-count" min="1" max="100" value="3" class="tool-input">
+                    </div>
+                    <div class="control-group checkbox-group">
+                        <input type="checkbox" id="lorem-start" checked>
+                        <label for="lorem-start">Start with "Lorem ipsum"</label>
+                    </div>
+                    <button id="lorem-generate" class="tool-btn">GENERATE</button>
+                </div>
+                <div class="tool-output">
+                    <div class="text-output" id="lorem-output">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                    <button class="copy-btn" data-copy="lorem-output">COPY TEXT</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="spacing" class="tool-section">
+        <div class="container">
+            <h2 class="tool-title">LETTER SPACING VISUALIZER</h2>
+            <p class="hero-subtitle" style="margin-bottom: 2rem;">Fine-tune typography with live preview</p>
+            <div class="tool-content">
+                <div class="tool-panel">
+                    <div class="control-group">
+                        <label>Letter Spacing (px)</label>
+                        <input type="range" id="spacing-value" min="-5" max="20" value="0" step="0.5" class="tool-range">
+                        <span id="spacing-display">0px</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Font Size (px)</label>
+                        <input type="range" id="spacing-font-size" min="12" max="72" value="24" class="tool-range">
+                        <span id="spacing-font-display">24px</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Sample Text</label>
+                        <input type="text" id="spacing-text" value="The quick brown fox jumps over the lazy dog" class="tool-input">
+                    </div>
+                </div>
+                <div class="tool-output">
+                    <div class="spacing-preview" id="spacing-preview">
+                        The quick brown fox jumps over the lazy dog
+                    </div>
+                    <div class="code-output">
+                        <code id="spacing-code">letter-spacing: 0px;</code>
+                    </div>
+                    <button class="copy-btn" data-copy="spacing-code">COPY CSS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="qr" class="tool-section section-alt">
+        <div class="container">
+            <h2 class="tool-title">QR CODE GENERATOR</h2>
+            <p class="hero-subtitle" style="margin-bottom: 2rem;">Convert URLs and text into scannable QR codes</p>
+            <div class="tool-content">
+                <div class="tool-panel">
+                    <div class="control-group">
+                        <label>Content</label>
+                        <textarea id="qr-content" class="tool-textarea" rows="4" placeholder="Enter URL or text...">https://example.com</textarea>
+                    </div>
+                    <div class="control-group">
+                        <label>Size</label>
+                        <select id="qr-size" class="tool-select">
+                            <option value="128">Small (128px)</option>
+                            <option value="256" selected>Medium (256px)</option>
+                            <option value="512">Large (512px)</option>
+                        </select>
+                    </div>
+                    <button id="qr-generate" class="tool-btn">GENERATE QR CODE</button>
+                </div>
+                <div class="tool-output">
+                    <div class="qr-preview" id="qr-preview"></div>
+                    <button id="qr-download" class="tool-btn">DOWNLOAD PNG</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="minifier" class="tool-section">
+        <div class="container">
+            <h2 class="tool-title">CSS MINIFIER</h2>
+            <p class="hero-subtitle" style="margin-bottom: 2rem;">Compress CSS files for faster load times</p>
+            <div class="tool-content">
+                <div class="tool-panel">
+                    <div class="control-group">
+                        <label>Input CSS</label>
+                        <textarea id="css-input" class="tool-textarea code-textarea" rows="12" placeholder="Paste your CSS here...">body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}</textarea>
+                    </div>
+                    <button id="css-minify" class="tool-btn">MINIFY</button>
+                </div>
+                <div class="tool-output">
+                    <div class="control-group">
+                        <label>Minified CSS</label>
+                        <textarea id="css-output" class="tool-textarea code-textarea" rows="12" readonly></textarea>
+                    </div>
+                    <div class="stats" id="minify-stats"></div>
+                    <button class="copy-btn" data-copy="css-output">COPY CSS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lightbox" class="tool-section section-alt">
+        <div class="container">
+            <h2 class="tool-title">LIGHTBOX GALLERY GENERATOR</h2>
+            <p class="hero-subtitle" style="margin-bottom: 2rem;">Create image galleries with custom lightbox styles</p>
+            <div class="tool-content">
+                <div class="tool-panel">
+                    <div class="control-group">
+                        <label>Number of Images</label>
+                        <input type="number" id="lightbox-count" min="1" max="12" value="6" class="tool-input">
+                    </div>
+                    <div class="control-group">
+                        <label>Gallery Layout</label>
+                        <select id="lightbox-layout" class="tool-select">
+                            <option value="grid">Grid</option>
+                            <option value="masonry">Masonry</option>
+                            <option value="horizontal">Horizontal Scroll</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Gap Size (px)</label>
+                        <input type="range" id="lightbox-gap" min="0" max="40" value="16" class="tool-range">
+                        <span id="lightbox-gap-value">16px</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Border Radius (px)</label>
+                        <input type="range" id="lightbox-radius" min="0" max="40" value="0" class="tool-range">
+                        <span id="lightbox-radius-value">0px</span>
+                    </div>
+                    <h3 style="font-size: 1.1rem; font-weight: 900; margin-top: 1.5rem; margin-bottom: 0.5rem;">MODAL STYLING</h3>
+                    <div class="control-group">
+                        <label>Background Color</label>
+                        <input type="color" id="lightbox-bg-color" value="#000000" class="tool-color">
+                    </div>
+                    <div class="control-group">
+                        <label>Background Opacity (%)</label>
+                        <input type="range" id="lightbox-bg-opacity" min="0" max="100" value="95" class="tool-range">
+                        <span id="lightbox-bg-opacity-value">95%</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Image Border Width (px)</label>
+                        <input type="range" id="lightbox-image-border" min="0" max="10" value="0" class="tool-range">
+                        <span id="lightbox-image-border-value">0px</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Image Border Color</label>
+                        <input type="color" id="lightbox-image-border-color" value="#ffffff" class="tool-color">
+                    </div>
+                    <div class="control-group checkbox-group">
+                        <input type="checkbox" id="lightbox-shadow" checked>
+                        <label for="lightbox-shadow">Image Shadow</label>
+                    </div>
+                    <div class="control-group">
+                        <label>Close Button Color</label>
+                        <input type="color" id="lightbox-close-btn-color" value="#ffffff" class="tool-color">
+                    </div>
+                    <div class="control-group">
+                        <label>Nav Button Background</label>
+                        <input type="color" id="lightbox-nav-btn-bg" value="#333333" class="tool-color">
+                    </div>
+                    <div class="control-group">
+                        <label>Nav Button Color</label>
+                        <input type="color" id="lightbox-nav-btn-color" value="#ffffff" class="tool-color">
+                    </div>
+                    <div class="control-group">
+                        <label>Caption Color</label>
+                        <input type="color" id="lightbox-caption-color" value="#ffffff" class="tool-color">
+                    </div>
+                    <div class="control-group checkbox-group">
+                        <input type="checkbox" id="lightbox-captions" checked>
+                        <label for="lightbox-captions">Include Captions</label>
+                    </div>
+                    <div class="control-group checkbox-group">
+                        <input type="checkbox" id="lightbox-controls" checked>
+                        <label for="lightbox-controls">Navigation Arrows</label>
+                    </div>
+                    <button id="lightbox-generate" class="tool-btn">GENERATE GALLERY</button>
+                </div>
+                <div class="tool-output">
+                    <div id="lightbox-preview" class="lightbox-gallery-preview">
+                        <p style="color: var(--text-secondary); text-align: center;">Click "Generate Gallery" to see preview</p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <div class="code-output" id="lightbox-html-output" style="display: none;">
+                    <strong style="display: block; margin-bottom: 0.5rem;">HTML:</strong>
+                    <pre><code id="lightbox-html-code"></code></pre>
+                </div>
+                <div class="code-output" id="lightbox-css-output" style="display: none; margin-top: 1rem;">
+                    <strong style="display: block; margin-bottom: 0.5rem;">CSS:</strong>
+                    <pre><code id="lightbox-css-code"></code></pre>
+                </div>
+                <div class="code-output" id="lightbox-js-output" style="display: none; margin-top: 1rem;">
+                    <strong style="display: block; margin-bottom: 0.5rem;">JavaScript:</strong>
+                    <pre><code id="lightbox-js-code"></code></pre>
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;" id="lightbox-copy-buttons" style="display: none;">
+                    <button class="copy-btn" data-copy="lightbox-html-code">COPY HTML</button>
+                    <button class="copy-btn" data-copy="lightbox-css-code">COPY CSS</button>
+                    <button class="copy-btn" data-copy="lightbox-js-code">COPY JS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tooltip" class="tool-section">
+        <div class="container">
+            <h2 class="tool-title">TOOLTIP GENERATOR</h2>
+            <p class="hero-subtitle" style="margin-bottom: 2rem;">Create custom tooltips with various styles</p>
+            <div class="tool-content">
+                <div class="tool-panel">
+                    <div class="control-group">
+                        <label>Position</label>
+                        <select id="tooltip-position" class="tool-select">
+                            <option value="top">Top</option>
+                            <option value="bottom">Bottom</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Tooltip Text</label>
+                        <input type="text" id="tooltip-text" value="This is a helpful tooltip!" class="tool-input">
+                    </div>
+                    <div class="control-group">
+                        <label>Trigger Text</label>
+                        <input type="text" id="tooltip-trigger" value="Hover over me" class="tool-input">
+                    </div>
+                    <div class="control-group">
+                        <label>Max Width (px)</label>
+                        <input type="range" id="tooltip-width" min="100" max="400" value="200" class="tool-range">
+                        <span id="tooltip-width-value">200px</span>
+                    </div>
+                    <h3 style="font-size: 1.1rem; font-weight: 900; margin-top: 1.5rem; margin-bottom: 0.5rem;">TOOLTIP STYLING</h3>
+                    <div class="control-group">
+                        <label>Background Color</label>
+                        <input type="color" id="tooltip-bg-color" value="#333333" class="tool-color">
+                    </div>
+                    <div class="control-group">
+                        <label>Text Color</label>
+                        <input type="color" id="tooltip-text-color" value="#ffffff" class="tool-color">
+                    </div>
+                    <div class="control-group">
+                        <label>Border Width (px)</label>
+                        <input type="range" id="tooltip-border-width" min="0" max="5" value="0" class="tool-range">
+                        <span id="tooltip-border-width-value">0px</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Border Color</label>
+                        <input type="color" id="tooltip-border-color" value="#666666" class="tool-color">
+                    </div>
+                    <div class="control-group">
+                        <label>Border Radius (px)</label>
+                        <input type="range" id="tooltip-border-radius" min="0" max="20" value="4" class="tool-range">
+                        <span id="tooltip-border-radius-value">4px</span>
+                    </div>
+                    <div class="control-group checkbox-group">
+                        <input type="checkbox" id="tooltip-shadow" checked>
+                        <label for="tooltip-shadow">Shadow</label>
+                    </div>
+                    <div class="control-group">
+                        <label>Arrow Size (px)</label>
+                        <input type="range" id="tooltip-arrow" min="0" max="20" value="8" class="tool-range">
+                        <span id="tooltip-arrow-value">8px</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Arrow Color</label>
+                        <input type="color" id="tooltip-arrow-color" value="#333333" class="tool-color">
+                    </div>
+                    <div class="control-group checkbox-group">
+                        <input type="checkbox" id="tooltip-show-arrow" checked>
+                        <label for="tooltip-show-arrow">Show Arrow</label>
+                    </div>
+                    <button id="tooltip-generate" class="tool-btn">GENERATE TOOLTIP</button>
+                </div>
+                <div class="tool-output">
+                    <div id="tooltip-preview" class="tooltip-preview-container">
+                        <p style="color: var(--text-secondary); text-align: center; margin-bottom: 2rem;">Click "Generate Tooltip" to see preview</p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <div class="code-output" id="tooltip-html-output" style="display: none;">
+                    <strong style="display: block; margin-bottom: 0.5rem;">HTML:</strong>
+                    <pre><code id="tooltip-html-code"></code></pre>
+                </div>
+                <div class="code-output" id="tooltip-css-output" style="display: none; margin-top: 1rem;">
+                    <strong style="display: block; margin-bottom: 0.5rem;">CSS:</strong>
+                    <pre><code id="tooltip-css-code"></code></pre>
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;" id="tooltip-copy-buttons" style="display: none;">
+                    <button class="copy-btn" data-copy="tooltip-html-code">COPY HTML</button>
+                    <button class="copy-btn" data-copy="tooltip-css-code">COPY CSS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>APHELION PROJECT • 2026</p>
+                <div class="footer-links">
+                    <a href="/aphelion-project.github.io/index.html" class="link">HOME</a>
+                    <a href="https://github.com/aphelion-project" class="link">GITHUB</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <span class="arrow-up">↑</span>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="/aphelion-project.github.io/js/script.js"></script>
+    <script src="/aphelion-project.github.io/js/staticsitetools.js"></script>
+</body>
+</html>
