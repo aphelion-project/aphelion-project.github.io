@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/ap-apple-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/apicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/apicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/ap-favicon.ico">
+    <title>VRChat Tools - APHELION PROJECT</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/vrchattools.css">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <nav class="nav">
+        <div class="nav-container">
+            <h1 class="logo">APHELION</h1>
+            <div class="nav-links">
+                <a href="../index.html">HOME</a>
+                <a href="../index.html#projects">PROJECTS</a>
+                <a href="../index.html#tools">TOOLS</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon">☀</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-small">
+        <div class="hero-content">
+            <h2 class="hero-title">VRCHAT TOOLS</h2>
+            <p class="hero-subtitle">= OPTIMIZATION // CREATION // FUN =</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <!-- Tool Navigation -->
+            <div class="tool-nav">
+                <button class="tool-nav-btn" data-tool="credits">WORLD CREDITS GENERATOR</button>
+                <button class="tool-nav-btn" data-tool="world-ideas">WORLD IDEA GENERATOR</button>
+                <button class="tool-nav-btn" data-tool="bingo">VRCHAT BINGO</button>
+            </div>
+
+            <!-- World Credits Generator Tool -->
+            <div id="credits-tool" class="tool-section">
+                <div class="tool-header-info">
+                    <div class="info-card">
+                        <h3>WORLD CREDITS GENERATOR</h3>
+                        <p>Create formatted credit attributions for your VRChat world. Perfect for world descriptions, in-world TextMeshPro displays, or documentation. Easily copy and paste the output or customize the format to match your style.</p>
+                    </div>
+                </div>
+
+                <div class="credits-container">
+                    <!-- Input Section -->
+                    <div class="credits-input-card">
+                        <div class="credits-header">
+                            <h3>ADD CREDITS</h3>
+                        </div>
+
+                        <div class="credits-form">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="credit-category">CATEGORY</label>
+                                    <select id="credit-category" class="credit-select">
+                                        <option value="World Creator">World Creator</option>
+                                        <option value="3D Models">3D Models</option>
+                                        <option value="Textures">Textures</option>
+                                        <option value="Materials">Materials</option>
+                                        <option value="Shaders">Shaders</option>
+                                        <option value="Audio">Audio</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Sound Effects">Sound Effects</option>
+                                        <option value="Scripts/Udon">Scripts/Udon</option>
+                                        <option value="Prefabs">Prefabs</option>
+                                        <option value="Lighting">Lighting</option>
+                                        <option value="Post Processing">Post Processing</option>
+                                        <option value="UI/UX">UI/UX</option>
+                                        <option value="Testing">Testing</option>
+                                        <option value="Special Thanks">Special Thanks</option>
+                                        <option value="Custom">Custom Category</option>
+                                    </select>
+                                </div>
+                                <div class="input-group" id="custom-category-group" style="display: none;">
+                                    <label for="custom-category">CUSTOM CATEGORY</label>
+                                    <input type="text" id="custom-category" class="credit-input" placeholder="Enter custom category">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="credit-name">ASSET/CREATOR NAME</label>
+                                <input type="text" id="credit-name" class="credit-input" placeholder="e.g., 'Skybox - Fantasy Sky' or 'JohnDoe'">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="credit-author">AUTHOR/SOURCE</label>
+                                <input type="text" id="credit-author" class="credit-input" placeholder="e.g., 'by Mochie' or 'Unity Asset Store'">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="credit-link">LINK (OPTIONAL)</label>
+                                <input type="url" id="credit-link" class="credit-input" placeholder="https://example.com">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="credit-license">LICENSE (OPTIONAL)</label>
+                                <input type="text" id="credit-license" class="credit-input" placeholder="e.g., 'CC BY 4.0' or 'Personal Use Only'">
+                            </div>
+
+                            <div class="form-actions">
+                                <button id="add-credit-btn" class="btn-primary">ADD CREDIT</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credits List Section -->
+                    <div class="credits-list-card">
+                        <div class="credits-header">
+                            <h3>CREDITS LIST</h3>
+                            <div class="credits-actions">
+                                <button id="clear-all-btn" class="btn-small">CLEAR ALL</button>
+                            </div>
+                        </div>
+
+                        <div id="credits-list" class="credits-list">
+                            <div class="empty-state">
+                                <p>NO CREDITS ADDED YET</p>
+                                <p class="empty-state-subtitle">Add credits using the form above</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Section -->
+                    <div class="credits-output-card">
+                        <div class="credits-header">
+                            <h3>FORMATTED OUTPUT</h3>
+                            <div class="format-selector">
+                                <button class="format-btn active" data-format="textmeshpro">TEXTMESHPRO</button>
+                                <button class="format-btn" data-format="plain">PLAIN TEXT</button>
+                                <button class="format-btn" data-format="markdown">MARKDOWN</button>
+                                <button class="format-btn" data-format="bbcode">BBCODE</button>
+                            </div>
+                        </div>
+
+                        <div class="output-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="include-links" checked>
+                                <span>INCLUDE LINKS</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="include-licenses" checked>
+                                <span>INCLUDE LICENSES</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="group-by-category" checked>
+                                <span>GROUP BY CATEGORY</span>
+                            </label>
+                        </div>
+
+                        <div class="output-display">
+                            <pre id="output-text" class="output-text">Add credits to see formatted output...</pre>
+                        </div>
+
+                        <div class="output-actions">
+                            <button id="copy-output-btn" class="btn-primary">
+                                COPY TO CLIPBOARD
+                            </button>
+                            <button id="download-output-btn" class="btn-secondary">
+                                DOWNLOAD AS .TXT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-card">
+                        <h3>FORMAT GUIDE</h3>
+                        <div class="format-guide-grid">
+                            <div class="format-guide-item">
+                                <h4>TEXTMESHPRO</h4>
+                                <p>Uses TextMeshPro rich text tags like &lt;b&gt;, &lt;i&gt;, &lt;color&gt;, and &lt;link&gt;. Perfect for in-world text displays with clickable links.</p>
+                            </div>
+                            <div class="format-guide-item">
+                                <h4>PLAIN TEXT</h4>
+                                <p>Simple, unformatted text. Great for basic world descriptions or documentation where formatting isn't supported.</p>
+                            </div>
+                            <div class="format-guide-item">
+                                <h4>MARKDOWN</h4>
+                                <p>Uses Markdown syntax (**, *, [links]). Ideal for GitHub repos, Discord messages, or documentation sites.</p>
+                            </div>
+                            <div class="format-guide-item">
+                                <h4>BBCODE</h4>
+                                <p>Uses BBCode tags like [b], [i], [url]. Common in forums and some social platforms.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>BEST PRACTICES</h3>
+                        <div class="tips-grid">
+                            <div class="tip-item">
+                                <div class="tip-content">
+                                    <h4>RESPECT LICENSES</h4>
+                                    <p>Always check and follow asset licenses. Include license info when required by the creator.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-content">
+                                    <h4>LINK TO SOURCES</h4>
+                                    <p>Provide links to asset creators' stores, portfolios, or social media to support their work.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-content">
+                                    <h4>BE SPECIFIC</h4>
+                                    <p>Name specific assets, not just "various models". This helps others find resources and shows appreciation.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-content">
+                                    <h4>KEEP IT UPDATED</h4>
+                                    <p>Update credits when you add, remove, or replace assets in your world. Accuracy matters!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- World Idea Generator Tool -->
+            <div id="world-ideas-tool" class="tool-section">
+                <div class="tool-header-info">
+                    <div class="info-card">
+                        <h3>WORLD IDEA GENERATOR</h3>
+                        <p>Generate creative VRChat world concepts by combining themes, settings, and mechanics. Perfect for sparking inspiration when you're stuck or want to explore new directions for your next world project.</p>
+                    </div>
+                </div>
+
+                <div class="idea-generator-wrapper">
+                    <!-- Generator Controls -->
+                    <div class="generator-card">
+                        <div class="generator-header">
+                            <h3>GENERATE IDEAS</h3>
+                        </div>
+
+                        <div class="generator-controls">
+                            <div class="control-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-theme" checked>
+                                    <span>THEME/AESTHETIC</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-setting" checked>
+                                    <span>SETTING/LOCATION</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-feature" checked>
+                                    <span>KEY FEATURE</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-mood" checked>
+                                    <span>MOOD/ATMOSPHERE</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-activity" checked>
+                                    <span>ACTIVITY/PURPOSE</span>
+                                </label>
+                            </div>
+
+                            <div class="generator-actions">
+                                <button id="generate-idea-btn" class="btn-primary">GENERATE IDEA</button>
+                                <button id="generate-multiple-btn" class="btn-secondary">GENERATE 5 IDEAS</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generated Ideas Display -->
+                    <div class="ideas-display-card">
+                        <div class="ideas-header">
+                            <h3>GENERATED IDEAS</h3>
+                            <div class="ideas-actions">
+                                <button id="clear-ideas-btn" class="btn-small">CLEAR ALL</button>
+                            </div>
+                        </div>
+
+                        <div id="ideas-list" class="ideas-list">
+                            <div class="empty-state">
+                                <p>NO IDEAS GENERATED YET</p>
+                                <p class="empty-state-subtitle">Click "Generate Idea" to get started</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-card">
+                        <h3>HOW TO USE</h3>
+                        <div class="tips-grid">
+                            <div class="tip-item">
+                                <div class="tip-content">
+                                    <h4>MIX AND MATCH</h4>
+                                    <p>Toggle different elements on or off to focus on specific aspects of your world concept.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-content">
+                                    <h4>ITERATE</h4>
+                                    <p>Generate multiple ideas and combine elements from different suggestions to create something unique.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-content">
+                                    <h4>EXPAND ON IT</h4>
+                                    <p>Use generated ideas as starting points. Add your own twist and develop the concept further.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-content">
+                                    <h4>SAVE YOUR FAVORITES</h4>
+                                    <p>Copy interesting ideas to a document. You can always come back and develop them later.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VRChat Bingo Tool -->
+            <div id="bingo-tool" class="tool-section">
+                <div class="tool-header-info">
+                    <div class="info-card">
+                        <h3>VRCHAT BINGO</h3>
+                        <p>Generate a bingo card filled with VRChat experiences YOU might have done. Mark off the ones you're guilty of! Some wholesome, some embarrassing, some you might not want to admit.</p>
+                    </div>
+                </div>
+
+                <div class="bingo-generator-wrapper">
+                    <!-- Generator Controls -->
+                    <div class="bingo-control-card">
+                        <div class="bingo-header">
+                            <h3>GENERATE BINGO CARD</h3>
+                        </div>
+
+                        <div class="bingo-controls">
+                            <div class="bingo-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="include-free-space" checked>
+                                    <span>INCLUDE FREE SPACE (CENTER)</span>
+                                </label>
+                            </div>
+
+                            <div class="bingo-actions">
+                                <button id="generate-bingo-btn" class="btn-primary">GENERATE CARD</button>
+                                <button id="reset-bingo-btn" class="btn-secondary">RESET MARKS</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bingo Card Display -->
+                    <div class="bingo-card-container">
+                        <div class="bingo-card-header">
+                            <h3>YOUR BINGO CARD</h3>
+                            <div class="bingo-card-actions">
+                                <button id="download-bingo-btn" class="btn-small">DOWNLOAD IMAGE</button>
+                            </div>
+                        </div>
+
+                        <div id="bingo-card" class="bingo-card">
+                            <div class="bingo-title">NEVER HAVE I EVER</div>
+                            <div id="bingo-grid" class="bingo-grid">
+                                <!-- Generated by JS -->
+                            </div>
+                            <div class="bingo-watermark">aphelionproject.dev</div>
+                        </div>
+
+                        <div class="bingo-instructions">
+                            <p><strong>NOTE:</strong> The cards are randomly generated, but try to be honest.</p>
+                        </div>
+
+                        <div class="social-share-note">
+                            <p>Share your card on social media with <strong>#AphelionVRCBingo</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>APHELION PROJECT • 2026</p>
+                <div class="footer-links">
+                    <a href="#" class="link">GITHUB</a>
+                    <a href="#" class="link">EMAIL</a>
+                    <a href="../index.html" class="link">HOME</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/vrchattools.js"></script>
+</body>
+</html>
